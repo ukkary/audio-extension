@@ -1,0 +1,14 @@
+# Source asset bundles (icon working files, not shipped with the extension)
+audio_extension_refined_icon_bundle/
+audio_extension_refined_with_gray_icon_bundle/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / packaging output
+*.zip
+dist/
+build/

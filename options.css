@@ -49,12 +49,14 @@ html, body {
 .logo-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
-  background: var(--accent-grad);
-  color: #0a0a14;
   display: grid;
   place-items: center;
-  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
+  filter: drop-shadow(0 6px 20px rgba(0, 212, 255, 0.25));
+}
+.logo-icon img {
+  width: 44px;
+  height: 44px;
+  display: block;
 }
 h1 {
   margin: 0;
