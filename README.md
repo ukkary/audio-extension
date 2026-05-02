@@ -1,4 +1,4 @@
-# Audio Compressor Pro
+# SonicComp
 
 Per-tab audio compressor for Chrome (Manifest V3). Boost quiet videos, tame loud explosions, and fix Twitch clip audio that won't play through Web Audio.
 
@@ -27,9 +27,9 @@ Per-tab audio compressor for Chrome (Manifest V3). Boost quiet videos, tame loud
 2. Click the extension icon
 3. Toggle the switch **on** — Chrome will start capturing this tab's audio
 4. Pick a preset or tweak sliders live
-5. Click **Save as Default** to make the current settings the starting point for new tabs
+5. Click **Save settings for this site** to remember them for the selected scope (domain / section / page)
 
-The badge shows `ON` for tabs where compression is active.
+The toolbar icon swaps to the colored variant on tabs where compression is active.
 
 ## How it works
 
@@ -58,5 +58,5 @@ The offscreen document holds one shared `AudioContext` and a `Map<tabId, pipelin
 ## Notes
 
 - Requires Chrome 116+ (offscreen API + `getMediaStreamId` with `targetTabId`)
-- The badge text and tab state reset when the tab is closed
+- Tab state and the active-icon indicator reset when the tab is closed
 - Compression is bypassed when the toggle is off — no audio path overhead
