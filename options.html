@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Audio Compressor — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M3 12h2l2-7 4 14 3-9 2 5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Audio Compressor</h1>
+            <p class="muted">Settings &amp; saved sites</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Saved sites</h2>
+          <span class="muted" id="rulesCount"></span>
+        </div>
+        <div id="rulesList" class="rules-list"></div>
+        <div id="rulesEmpty" class="empty-state" hidden>
+          <p>No site settings saved yet.</p>
+          <p class="muted">
+            Click the extension on any tab and use <strong>Save settings for this site</strong>
+            to remember the compressor for that domain, section, or page.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Global default</h2>
+          <button id="resetDefaultsBtn" class="btn-ghost">Reset to factory</button>
+        </div>
+        <p class="muted small">Used when a tab has no matching saved site.</p>
+        <div id="defaultSummary" class="rule-row defaults"></div>
+      </section>
+
+      <footer class="page-footer muted small">
+        v<span id="ver"></span> · Settings sync via <code>chrome.storage.local</code>.
+      </footer>
+    </main>
+    <script src="presets.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

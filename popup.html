@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path d="M3 12h2l2-7 4 14 3-9 2 5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">Audio Compressor</div>
+            <div class="brand-sub" id="tabTitle">—</div>
+          </div>
+        </div>
+        <label class="switch" title="Enable for this tab">
+          <input type="checkbox" id="enableToggle" />
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </label>
+      </header>
+
+      <section class="status" id="statusBar">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Disabled</span>
+      </section>
+
+      <section class="card scope-card" id="scopeCard">
+        <div class="scope-row">
+          <label class="scope-label" for="scopeSelect">Save scope</label>
+          <select id="scopeSelect" class="scope-select"></select>
+          <button id="deleteRuleBtn" class="icon-btn" title="Delete saved settings for this scope" hidden>
+            <svg viewBox="0 0 24 24" width="14" height="14"><path d="M3 6h18M8 6V4h8v2m-9 0v14a2 2 0 002 2h6a2 2 0 002-2V6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <label class="scope-auto">
+          <input type="checkbox" id="autoEnable" />
+          <span>Auto-apply when I open this {scope}</span>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span>Compressor</span>
+          <button id="resetBtn" class="link-btn" type="button">Reset</button>
+        </div>
+
+        <div class="control" data-key="boost">
+          <div class="control-row">
+            <span class="control-label">Boost <span class="control-tag">Volume</span></span>
+            <span class="control-value" id="val-boost">1.00x</span>
+          </div>
+          <input type="range" min="0" max="4" step="0.01" value="1" id="rng-boost" />
+        </div>
+
+        <div class="control" data-key="threshold">
+          <div class="control-row">
+            <span class="control-label">Threshold</span>
+            <span class="control-value" id="val-threshold">-24 dB</span>
+          </div>
+          <input type="range" min="-100" max="0" step="1" value="-24" id="rng-threshold" />
+        </div>
+
+        <div class="control" data-key="knee">
+          <div class="control-row">
+            <span class="control-label">Knee</span>
+            <span class="control-value" id="val-knee">30 dB</span>
+          </div>
+          <input type="range" min="0" max="40" step="1" value="30" id="rng-knee" />
+        </div>
+
+        <div class="control" data-key="ratio">
+          <div class="control-row">
+            <span class="control-label">Ratio</span>
+            <span class="control-value" id="val-ratio">12:1</span>
+          </div>
+          <input type="range" min="1" max="20" step="0.1" value="12" id="rng-ratio" />
+        </div>
+
+        <div class="control" data-key="attack">
+          <div class="control-row">
+            <span class="control-label">Attack</span>
+            <span class="control-value" id="val-attack">3 ms</span>
+          </div>
+          <input type="range" min="0" max="1" step="0.001" value="0.003" id="rng-attack" />
+        </div>
+
+        <div class="control" data-key="release">
+          <div class="control-row">
+            <span class="control-label">Release</span>
+            <span class="control-value" id="val-release">250 ms</span>
+          </div>
+          <input type="range" min="0" max="1" step="0.01" value="0.25" id="rng-release" />
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-title">
+          <span>AI Presets</span>
+          <span class="hint">tap to apply</span>
+        </div>
+        <div class="preset-grid" id="presetGrid"></div>
+      </section>
+
+      <footer class="footer">
+        <button id="saveSiteBtn" class="btn-primary" type="button">Save settings for this site</button>
+        <button id="openOptionsBtn" class="icon-btn-lg" title="Open settings">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </footer>
+
+      <div id="errorBar" class="error" hidden></div>
+    </div>
+
+    <script src="presets.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
